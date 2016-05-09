@@ -188,7 +188,7 @@ class Router(BaseRouter):
             self.logger.warn('Migration directory: %s does not exists.', self.migrate_dir)
             os.makedirs(self.migrate_dir)
         return sorted(
-            ''.join(f[:-3]) for f in os.listdir(self.migrate_dir) if self.filemask.match(f))
+            f.rpartition('.')[0] for f in os.listdir(self.migrate_dir) if self.filemask.match(f))
 
     def _create(self, name, migrate='', rollback=''):
         """Create a migration."""
